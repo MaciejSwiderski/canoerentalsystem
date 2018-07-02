@@ -1,0 +1,226 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>RentForm</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>jQuery UI Datepicker - Default functionality</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#datepicker").datepicker({dateFormat: 'dd-mm-yy'});
+        });
+        $(function () {
+            $("#datepickerTwo").datepicker({dateFormat: 'dd-mm-yy'});
+        });
+
+    </script>
+    <style>
+        .custom {
+            width: 175px !important;
+        }
+
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+
+        .bg {
+            background-image: url("../canoebcg.jpg");
+            height: 100%;
+
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .form-control {
+            width: 300px;
+            background-color: white;
+
+        }
+    </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <script type="text/javascript">
+    </script>
+</head>
+
+<body>
+<div class="bg">
+
+    <!--<div align="center">-->
+    <!--<h2 >Make a reservation</h2>-->
+    <!--</div>-->
+    <!--<br/>-->
+
+
+    <div class="container" align="left" style="float: left;width: 10%; margin: 50px; ">
+
+        <div align="left">
+            <p style=" color: black; width: 70%;font-size:100%;"></p>
+        </div>
+        <br/>
+        <form th:action="@{/logout}" method="post">
+            <button class="btn btn-danger custom" name="back" type="submit" value="Sign Out">Sign out</button>
+        </form>
+        <br/>
+
+        <form th:action="@{/}">
+            <button class="btn btn-success custom" name="back" type="submit">Back</button>
+        </form>
+        <br/>
+        <form th:action="@{/web/Rent}">
+            <button class="btn btn-danger custom" name="back" type="submit">My rents</button>
+        </form>
+        <!--<br/>-->
+        <form th:action="@{/web/RentLast}">
+            <button class="btn btn-danger custom" name="back" type="submit">My last order</button>
+        </form>
+        <!--<br/>-->
+        <form th:action="@{/admin}">
+            <button class="btn btn-danger custom" name="back" type="submit">Admin panel</button>
+        </form>
+    </div>
+    <br/>
+    <div class="container" align="center" style="float: left;width: 40%">
+
+        <form enctype='application/json' th:action="@{/web/addRentTrip}" method="post" th:object="${rentOfTrips}">
+
+            <input type="hidden" th:field="*{user.email}" th:placeholder="User"
+                   class="form-control"/>
+
+            <!--<br/>-->
+            <div align="center">
+                <p style="  color: black; width: 55%;font-size:100%">ORDER TRIPS /
+                    CANOES PER DAY</p>
+            </div>
+            <td><p style="font-size: 15px; color: black">Start date (from today onwards):</p></td>
+            <input type="date" id="startDate" name="startDate" required
+                   oninvalid="this.setCustomValidity('Please choose start date from today onwards')"
+                   oninput="this.setCustomValidity('')"
+                   class="form-control"/>
+            <td><p style="font-size: 15px;color: black ">End date:</p></td>
+
+            <input type="date" id="endDate" name="endDate" required
+                   oninvalid="this.setCustomValidity('Please choose end date from tomorrow onwards ')"
+                   oninput="this.setCustomValidity('')"
+                   class="form-control"/>
+            <td><p style="font-size: 15px;color: black">Select canoe type:</p></td>
+            <select type="text" th:field="*{canoeTrip.canoeTripType}" required th:placeholder="Canoe"
+                    oninvalid="this.setCustomValidity('Please choose from the list below')"
+                    oninput="this.setCustomValidity('')"
+                    class="form-control"/>
+            <option value=""> --</option>
+            <option th:each="canoeTrip : ${canoeTripList}"
+                    th:value="${canoeTrip.canoeTripType}"
+                    th:utext="${canoeTrip.canoeTripType}"></option>
+            </select>
+            <td><p style="font-size: 15px;color: black">Quantity of canoes for a trip:</p></td>
+            <input type="text" id="canoeTripAmount" name="canoeTripAmount" required
+                   oninvalid="this.setCustomValidity('Please fill in the field')"
+                   oninput="this.setCustomValidity('')"
+                   th:placeholder="Quantity"
+                   class="form-control"/>
+            <td><p style="font-size: 15px;color: black">Select trip:</p></td>
+            <select type="text" th:field="*{trip.location}" required th:placeholder="Location"
+                    oninvalid="this.setCustomValidity('Please choose from the list below')"
+                    oninput="this.setCustomValidity('')"
+                    class="form-control"/>
+            <option value=""> --</option>
+            <option th:each="trip : ${tripList}"
+                    th:value="${trip.location}"
+                    th:utext="${trip.location}"></option>
+            </select>
+            <td><p style="font-size: 15px;color: black">Quantity of trips:</p></td>
+            <input type="text" id="tripAmount" name="tripAmount" required th:placeholder="Quantity"
+                   oninvalid="this.setCustomValidity('Please fill in the field')"
+                   oninput="this.setCustomValidity('')"
+                   class="form-control"/>
+            <input type="hidden" id="rentOfTripPrice" name="rentOfTripPrice" value="0" th:placeholder="TotalPrice"
+                   class="form-control"/><br/>
+            <button class="btn btn-danger custom" name="Submit" value="add" th:text="Submit"></button>
+            <br/>
+            <br/>
+        </form>
+    </div>
+
+
+    <div class="container" align="center" style="float: left;width: 40%">
+        <form enctype='application/json' th:action="@{/web/addRent}" method="post" th:object="${rent}">
+            <div align="center">
+                <p style=" color: white; width: 55%;font-size:100%">RENT CANOE PER HOUR</p>
+            </div>
+            <input type="hidden" th:field="*{user.email}" th:placeholder="User"
+                   class="form-control"/>
+            <td><p style="font-size: 15px;color: white">Canoe rent date (from today onwards):</p></td>
+            <fieldset>
+                <input type="date" id="rentPerHourDate" name="rentPerHourDate" required
+                       oninvalid="this.setCustomValidity('Please choose start date from today onwards ')"
+                       oninput="this.setCustomValidity('')"
+                       class="form-control"/>
+            </fieldset>
+            <td><p style="font-size: 15px;color: white">Canoe rent time:</p></td>
+            <fieldset>
+                <input type="time" id="rentPerHourTime" name="rentPerHourTime" min="06:00" max="20:00" required
+                       class="form-control"/>
+            </fieldset>
+            <td><p style="font-size: 15px; color: white">Select canoe type per hour:</p></td>
+            <select type="text" th:field="*{canoe.canoeType}" required th:placeholder="Canoe"
+                    oninvalid="this.setCustomValidity('Please choose from the list below')"
+                    oninput="this.setCustomValidity('')"
+                    class="form-control"/>
+            <option value=""> --</option>
+            <option th:each="canoe : ${canoeList}"
+                    th:value="${canoe.canoeType}"
+                    th:utext="${canoe.canoeType}"></option>
+            </select>
+            <td><p style="font-size: 15px;color: white">Hours:</p></td>
+            <input type="text" id="hours" name="hours" required
+                   oninvalid="this.setCustomValidity('Please choose from the list below')"
+                   oninput="this.setCustomValidity('')"
+                   th:placeholder="Hours"
+                   class="form-control"/>
+            <td><p style="font-size: 15px;color: white">Quantity of canoes:</p></td>
+            <input type="text" id="canoeAmount" name="canoeAmount" required
+                   oninvalid="this.setCustomValidity('Please choose from the list below')"
+                   oninput="this.setCustomValidity('')"
+                   th:placeholder="Quantity"
+                   class="form-control"/>
+            <input type="hidden" id="rentPrice" name="rentPrice" value="0" th:placeholder="TotalPrice"
+                   class="form-control"/><br/>
+            <button class="btn btn-danger custom" name="Submit" value="add" th:text="Submit"></button>
+        </form>
+    </div>
+</div>
+</div>
+</body>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

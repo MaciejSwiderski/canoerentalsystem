@@ -1,0 +1,125 @@
+<!--<!DOCTYPE html>-->
+<!--&lt;!&ndash;<html lang="en">&ndash;&gt;-->
+
+<!--<html xmlns="http://www.w3.org/1999/xhtml"-->
+<!--xmlns:th="http://wwww.thymeleaf.org">-->
+
+<!--<head>-->
+<!--<meta charset="UTF-8">-->
+<!--<title>Title</title>-->
+<!--&lt;!&ndash;<head>&ndash;&gt;-->
+<!--&lt;!&ndash;<title></title>&ndash;&gt;-->
+<!--&lt;!&ndash;<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />&ndash;&gt;-->
+<!--&lt;!&ndash;<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>&ndash;&gt;-->
+<!--&lt;!&ndash;<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>&ndash;&gt;-->
+<!--&lt;!&ndash;</head>&ndash;&gt;-->
+<!--</head>-->
+
+<!--<body style="background-color:lightgoldenrodyellow">-->
+
+<!--<h2>All Trips</h2>-->
+
+<!--<form th:action="@{/admin}">-->
+<!--<button class="btn btn-danger" name="back" type="submit">Back</button>-->
+<!--</form>-->
+
+<!--<table border="1">-->
+
+<!--<tr>-->
+
+<!--<th>Location</th>-->
+<!--<th>Trip price</th>-->
+
+<!--<tr th:each="trip: ${tripList}">-->
+<!--<td th:text="${trip.getLocation()}"></td>-->
+<!--<td th:text="${trip.getTripPrice()}"></td>-->
+<!--</tr>-->
+
+<!--</tr>-->
+<!--</table>-->
+
+
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<!--<html lang="en">-->
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://wwww.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Trips</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .custom {
+            width: 175px !important;
+        }
+
+    </style>
+
+    <style>
+        #trips {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            /*width: 100%;*/
+        }
+
+        #trips td, #trips th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #trips tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #trips tr:hover {
+            background-color: #ddd;
+        }
+
+        /*indianred*/
+
+        #trips th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: indianred;
+            color: white;
+        }
+
+    </style>
+
+
+</head>
+<body style="background-image: url(/background/landscape.jpg)">
+<h2 align="center">All Trips</h2>
+<table id="trips" border="1" align="center">
+
+    <tr>
+        <th>Id</th>
+        <th>Location</th>
+        <th>Trip price</th>
+
+    <tr th:each="trip: ${tripList}">
+        <td th:text="${trip.getId()}"></td>
+        <td th:text="${trip.getLocation()}"></td>
+        <td th:text="${trip.getTripPrice()}"></td>
+    </tr>
+
+    </tr>
+
+</table>
+
+<br/>
+<br/>
+<div class="container" align="center">
+    <form th:action="@{/web/tripFunction}">
+        <button class="btn btn-success custom" name="back" type="submit">Back</button>
+    </form>
+</div>
+</body>
+</html>

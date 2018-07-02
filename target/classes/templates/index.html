@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Menu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .custom {
+            width: 170px !important;
+        }
+
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+
+        .bg {
+            background-image: url("../landscape.jpg");
+            height: 100%;
+
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .column {
+            float: left;
+            width: 16.66%;
+            padding: 5px;
+        }
+
+        /* Clearfix (clear floats) */
+        .row::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        img {
+            cursor: zoom-in;
+        }
+
+        .panelBackground {
+            width: 100%;
+            background: white;
+            -khtml-opacity: .60;
+            -moz-opacity: .60;
+            -ms-filter: ”alpha(opacity=60) ”;
+            filter: alpha(opacity=60);
+            filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0.6);
+            opacity: .60;
+            /*height: 70px;*/
+        }
+
+        img {
+            border-radius: 8px;
+        }
+
+        img:hover {
+            box-shadow: 0 0 10px 5px rgba(0, 140, 186, 0.5);
+        }
+
+    </style>
+    <script>
+        $(function () {
+            $('img').on('click', function () {
+                $('.enlargeImageModalSource').attr('src', $(this).attr('src'));
+                $('#enlargeImageModal').modal('show');
+            });
+        });
+    </script>
+</head>
+
+<body style="text-align:center;overflow: hidden">
+
+
+<!--<h2 style="color: white">Canoe Rental System </h2>-->
+<div class="bg">
+    <!--<div align="center" >-->
+    <!--<h1>Administration panel</h1>-->
+    <!--</div>-->
+    <br/>
+    <form th:action="@{/logout}" method="post">
+        <button class="btn btn-danger custom" name="back" type="submit" value="Sign Out">Sign out</button>
+    </form>
+    <br/>
+    <form th:action="@{/web/rentForm}">
+        <button class="btn btn-danger custom" name="Making Rent" type="submit">Rent</button>
+    </form>
+    <br/>
+    <!--<form th:action="@{/admin}">-->
+        <!--<button class="btn btn-danger custom" name="back" type="submit">Admin panel</button>-->
+    <!--</form>-->
+
+    <div class="row" style="width: 100%">
+        <div class="panelBackground" align="center" style="margin: 20px"><p><font size="2.5"><strong>
+            We rent canoes to inexperienced parties as well as to the experienced canoeist.
+
+            You can leave you car at the take-out point and we will shuttle you up river to the put-in point.<br/>
+
+            For down river trips, we will pick you up at the end of your trip and shuttle you back to your vehicle.
+
+            We provide approved life jackets and paddles which are included in the cost of the canoe rental.<br/>
+
+            Canoe trips in general vary depending on its difficulties and duriation. For now offer 3 canoe-trip
+            destinations:
+        </strong></font></p></div>
+        <div class="textOnPanel" align="center">
+
+        </div>
+    </div>
+    <div class="modal fade" id="enlargeImageModal" tabindex="-1" role="dialog" aria-labelledby="enlargeImageModal"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                    <img src="" class="enlargeImageModalSource" style="width: 100%;">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <p>Click the below images to enlarge them</p>
+        <div class="row">
+            <div class="col-md-2"><img style="width:100%; height:auto;" src="Smukala.jpg">
+                <p class="card-text" ; style="color: white">Smukał-Bydgoszcz<br/> price: 150 zł <br/> (Transport
+                    -return) </p>
+                <a href="/web/rentForm" class="btn btn-primary custom">Rent</a>
+            </div>
+            <div class="col-md-2"><img style="width:100%; height:auto;" src="Sokole_kuznica.jpg">
+                <p class="card-text" ; style="color: white">Sokole_Kużnica-Bydgoszcz price: 220 zł (Transport
+                    -return) </p>
+                <a href="/web/rentForm" class="btn btn-primary custom">Rent</a>
+            </div>
+            <div class="col-md-2"><img style="width:102%; height:auto;" src="Swornegacie.jpg">
+                <p class="card-text" ; style="color: white">Swornegacie-Bydgoszcz<br/> price: 270 zł <br/> (Transport
+                    -return) </p>
+                <a href="/web/rentForm" class="btn btn-primary custom">Rent</a>
+            </div>
+            <div class="col-md-2"><img style="width:100%; height:auto;" src="single.jpg">
+                <p class="card-text" ; style="color: white">Canoe single<br/> price: 20 zł / 1h <br/> 60 zł / 1 day </p>
+                <a href="/web/rentForm" class="btn btn-primary custom">Rent</a>
+            </div>
+            <div class="col-md-2"><img style="width:103%; height:auto;" src="double.jpg">
+                <p class="card-text" ; style="color: white">Canoe double<br/> price: 30 zł / 1h <br/> 90 zł / 1 day </p>
+                <a href="/web/rentForm" class="btn btn-primary custom">Rent</a>
+            </div>
+            <div class="col-md-2"><img style="width:110%; height:auto;" src="fours.jpg">
+                <p class="card-text" ; style="color: white">Canoe fours<br/> price: 50 zł / 1h <br/> 125 zł / 1 day </p>
+                <a href="/web/rentForm" class="btn btn-primary custom">Rent</a>
+            </div>
+        </div>
+        <br/>
+    </div>
+</div>
+</body>
+</html>
