@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>UserFunction</title>
+
+    <title></title>
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .custom {
+            width: 175px !important;
+        }
+
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+
+        .bg {
+            background-image: url("../landscape.jpg");
+            height: 100%;
+
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+
+</head>
+<body style=" overflow: hidden">
+<!--background-color:lightgoldenrodyellow;-->
+<div class="bg">
+    <!--<div align="center" style="border:1px solid lightskyblue">-->
+    <!--<h1>User functions</h1>-->
+    <!--</div>-->
+    <br/>
+    <div class="container" style="margin:50px">
+        <form th:action="@{/admin}">
+            <button class="btn btn-success custom" name="back" type="submit">Back</button>
+        </form>
+        <br/>
+        <form th:action="@{/web/Users}">
+            <button class="btn btn-danger custom" name="back" type="submit">Show all users</button>
+        </form>
+        <br/>
+        <form th:action="@{/web/removeUserForm}">
+            <button class="btn btn-danger custom" name="back" type="submit">Remove user</button>
+        </form>
+    </div>
+</div>
+</body>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:c="http://www.hibernate.org/xsd/hibernate-mapping">
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .validation-message {
+            color: red;
+        }
+    </style>
+    <style>
+        .custom {
+            width: 175px !important;
+        }
+
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+
+        .bg {
+            background-image: url("/background/landscape.jpg");
+            height: 110%;
+
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+    </style>
+</head>
+<body style="background-color:lightgoldenrodyellow">
+<div class="bg">
+<div align="center" style="border:1px solid lightskyblue">
+    <h1>Registration</h1>
+</div>
+<br/>
+<div align="center" class="container">
+    <form th:action="@{/}">
+        <button class="btn btn-danger custom" name="back" type="submit">Home</button>
+    </form>
+    <br/>
+    <form th:action="@{/login}">
+        <button class="btn btn-danger custom" name="back" type="submit">Sign in</button>
+    </form>
+</div>
+
+<div class="container" style="width: 40%">
+    <form th:action="@{/register}" method="post" th:object="${user}">
+        <label>Email</label>
+        <input type="text" id="email" th:field="*{email}" name="email" required th:placeholder="Email"
+               class="form-control"/><br/>
+        <label th:if="${#fields.hasErrors('email')}"
+               th:errors="*{email}" class="validation-message"></label>
+
+        <label>Firs name</label>
+        <input type="text" id="name" name="name" th:field="*{name}" required th:placeholder="Name"
+               class="form-control"/><br/>
+        <label th:if="${#fields.hasErrors('name')}"
+               th:errors="*{name}" class="validation-message"></label>
+
+        <label>Surname</label>
+        <input type="text" id="surname" name="surname" th:field="*{surname}" required th:placeholder="Surname"
+               class="form-control"/><br/>
+        <label th:if="${#fields.hasErrors('surname')}"
+               th:errors="*{surname}" class="validation-message"></label>
+
+        <label>Password</label>
+        <input type="password" id="password" name="password" th:field="*{password}" required th:placeholder="Password"
+               class="form-control"/><br/>
+        <label th:if="${#fields.hasErrors('password')}"
+               th:errors="*{password}" class="validation-message"></label>
+
+        <input type="hidden" id="enabled" name="enabled" value="1" th:field="*{enabled}"
+               class="form-control"/>
+        <label th:if="${#fields.hasErrors('enabled')}"
+               th:errors="*{enabled}" class="validation-message"></label>
+        <button class="btn btn-lg" name="Submit" value="login" th:text="Register"></button>
+    </form>
+    <div class="alert alert-success" th:text="${successMesssage}">
+    </div>
+</div>
+</div>
+</body>
+</html>

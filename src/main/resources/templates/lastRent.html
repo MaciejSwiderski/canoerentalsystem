@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://wwww.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>LastOrder</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+        .custom {
+            width: 175px !important;
+        }
+
+    </style>
+    <style>
+        #customers {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            /*width: 100%;*/
+        }
+
+        #customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #customers tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #customers tr{
+            background-color: white;
+        }
+
+        #customers tr:hover {
+            background-color: #ddd;
+        }
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: indianred;
+            color: white;
+        }
+
+        #customers1 {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            /*width: 100%;*/
+        }
+
+        #customers1 td, #customers1 th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #customers1 tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #customers1 tr:hover {
+            background-color: #ddd;
+        }
+
+        #customers1 tr{
+            background-color: white;
+        }
+
+        #customers1 th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: indianred;
+            color: white;
+        }
+
+    </style>
+
+
+</head>
+
+<body style="background-image: url(/background/landscape.jpg)">
+<br/>
+<div class="container" align="center">
+    <form th:action="@{/web/rentForm}">
+        <button class="btn btn-danger custom" name="back" type="submit">Back</button>
+    </form>
+</div>
+<br/>
+<h2 style="text-align: center">My Last Rent Order</h2>
+<table class="fixed_header" id="customers" border="1" align="center">
+
+    <tr>
+        <th>Rent number</th>
+        <th>Order placed</th>
+        <th>Email</th>
+        <th>Canoe type</th>
+        <th>Canoe price</th>
+        <th>Hours</th>
+        <th>Canoe amount</th>
+        <th>Rent day</th>
+        <th>Rent time</th>
+        <th>Total order price</th>
+    </tr>
+
+
+    <tr th:each="rent: ${rentsList}">
+        <td th:text="${rent.getRentId()}"></td>
+        <td th:text="${rent.getCreationTs()}"></td>
+        <td th:text="${rent.getUser().getEmail()}"></td>
+        <td th:text="${rent.getCanoe().getCanoeType()}"></td>
+        <td th:text="${rent.getCanoe().getPrice()}"></td>
+        <td th:text="${rent.getHours()}"></td>
+        <td th:text="${rent.getCanoeAmount()}"></td>
+        <td th:text="${rent.getRentPerHourDate()}"></td>
+        <td th:text="${rent.getRentPerHourTime()}"></td>
+        <td th:text="${rent.getRentPrice()}"></td>
+    </tr>
+
+</table>
+<br/>
+<div align="center"><img src="../MAIL.jpg" alt="no image found" width="100" height="100"></div>
+<br/>
+<tr th:each="rent: ${rentsList}">
+    <div align="center">
+        <div class="alert alert-info alert-dismissible fade in " align="center" style="width: 800px">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">close</a>
+            <strong>Info!</strong> Confirmation email has been sent to the following address:
+            <td th:text="${rent.getUser().getEmail()}"></td>
+        </div>
+    </div>
+</tr>
+<br/>
+<br/>
+<h2 style="text-align: center">My Last Rent for Trip Order</h2>
+<table class="fixed_header" id="customers1" border="1" align="center">
+
+    <tr>
+        <th>Rent number</th>
+        <th>Order placed</th>
+        <th>Email</th>
+        <th>Trip</th>
+        <th>Trip price</th>
+        <th>Trip amount</th>
+        <th>Trip canoes Amount</th>
+        <th>Canoe type-trip</th>
+        <th>Canoe per day</th>
+        <th>Start date</th>
+        <th>End date</th>
+        <th>Total order price</th>
+    </tr>
+
+    <tr th:each="rentOfTrips: ${rentsListOfTrips}">
+        <td th:text="${rentOfTrips.getRentOfTripId()}"></td>
+        <td th:text="${rentOfTrips.getRentOfTripCreationTs()}"></td>
+        <td th:text="${rentOfTrips.getUser().getEmail()}"></td>
+        <td th:text="${rentOfTrips.getTrip().getLocation()}"></td>
+        <td th:text="${rentOfTrips.getTrip().getTripPrice()}"></td>
+        <td th:text="${rentOfTrips.getTripAmount()}"></td>
+        <td th:text="${rentOfTrips.getCanoeTripAmount()}"></td>
+        <td th:text="${rentOfTrips.getCanoeTrip().getCanoeTripType()}"></td>
+        <td th:text="${rentOfTrips.getCanoeTrip().getCanoeForTripPrice()}"></td>
+        <td th:text="${rentOfTrips.getStartDate()}"></td>
+        <td th:text="${rentOfTrips.getEndDate()}"></td>
+        <td th:text="${rentOfTrips.getRentOfTripPrice()}"></td>
+    </tr>
+
+</table>
+<br/>
+<div align="center"><img src="../MAIL.jpg" alt="no image found" width="100" height="100"></div>
+<br/>
+<tr th:each="rentOfTrips: ${rentsListOfTrips}">
+    <div align="center">
+        <div class="alert alert-info alert-dismissible fade in " align="center" style="width: 800px">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">close</a>
+            <strong>Info!</strong> Confirmation email has been sent to the following address:
+            <td th:text="${rentOfTrips.getUser().getEmail()}"></td>
+        </div>
+    </div>
+</tr>
+</body>
+</html>

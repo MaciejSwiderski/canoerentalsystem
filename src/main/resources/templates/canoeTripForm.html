@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>CanoeTripForm</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .custom {
+            width: 175px !important;
+        }
+
+    </style>
+    <style>
+        .validation-message {
+            color: red;
+        }
+    </style>
+</head>
+
+<body style="background-image: url(/background/landscape.jpg)">
+<div align="center" style="border:1px solid red">
+    <h1>Canoe adding/updating</h1>
+</div>
+<br/>
+
+<div class="container" style="margin:50px">
+    <form th:action="@{/web/canoeFunction}">
+        <button class="btn btn-danger custom" name="back" type="submit">Back</button>
+    </form>
+</div>
+
+<div class="container" style="width: 40%">
+    <td><strong style="font-size: 12px;">Provide type and price for new canoe </strong></td>
+    <form th:action="@{/web/addCanoeTrip}" method="post" th:object="${canoeTrip}">
+        <input type="text" id="canoeTripType" name="canoeTripType" required th:placeholder="Canoe"
+               class="form-control"/><br/>
+        <input type="text" id="canoeForTripPrice" name="canoeForTripPrice" required th:placeholder="Price"
+               class="form-control"/><br/>
+        <button class="btn btn-danger custom" name="Submit" value="add" th:text="Adding"></button>
+    </form>
+    <div class="alert alert-success " th:text="${successMesssage}"></div>
+</div>
+<br/>
+<br/>
+
+<div class="container"style="width: 40%">
+    <form onsubmit="return myFunction(this);" th:action="@{/web/updateCanoeTrip}" method="post"
+          th:object="${canoeTrip}">
+        <td><strong style="font-size: 12px;color: white">Provide a canoe "Id" to update the Canoe</strong></td>
+        <input type="text" th:field="*{canoeTripId}" required th:placeholder="CanoeId"
+               class="form-control"/><br/>
+        <label th:if="${#fields.hasErrors('canoeTripId')}"
+               th:errors="*{canoeTripId}" class="validation-message"></label>
+        <input type="text" id="canoeType" name="canoeTripType" required th:placeholder="Type"
+               class="form-control"/><br/>
+        <input type="text" id="price" name="canoeForTripPrice" required th:placeholder="CanoePrice"
+               class="form-control"/><br/>
+        <button class="btn btn-danger custom" name="Submit" value="add" th:text="Updating"></button>
+    </form>
+    <div class="alert alert-success" th:text="${successMesssage3}"></div>
+</div>
+<script>
+    function myFunction() {
+        return confirm("Confirm!");
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>RemoveRentTrip</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .custom {
+            width: 175px !important;
+        }
+
+    </style>
+    <style>
+        .validation-message {
+            color: red;
+        }
+    </style>
+</head>
+<body style="background-image: url(/background/landscape.jpg)">
+<div align="center" style="border:1px solid red">
+    <h2>Rents removal panel</h2>
+</div>
+
+
+<div class="container" style="margin:50px">
+    <form th:action="@{/web/rentFunction}">
+        <button class="btn btn-danger custom" name="back" type="submit">Back</button>
+    </form>
+</div>
+
+<div class="container" style="width: 40%">
+    <form onsubmit="return myFunction(this);" th:action="@{/web/remove2}" method="post" th:object="${rentOfTrips}">
+        <td><strong style="font-size: 12px;">Provide a user's email to remove associated Rents</strong></td>
+        <!--<input type="text" th:field="*{name}">-->
+        <input type="text" th:field="*{user.email}" required th:placeholder="userEmail"
+               class="form-control"/><br/>
+        <label th:if="${#fields.hasErrors('user.email')}"
+               th:errors="*{user.email}" class="validation-message"></label><br/>
+        <!--<input type="submit" value="add">-->
+        <button class="btn btn-lg" name="Submit" value="add" th:text="Submit"></button>
+    </form>
+</div>
+<br/>
+<div class="container" style="width: 40%">
+    <form onsubmit="return myFunction(this);" th:action="@{/web/removeId2}" method="post" th:object="${rentOfTrips}">
+        <td><strong style="font-size: 12px;">Provide a rent "Id" to remove the Rent</strong></td>
+        <input type="text" th:field="*{rentOfTripId}" required th:placeholder="rentId"
+               class="form-control"/><br/>
+        <label th:if="${#fields.hasErrors('rentOfTripId')}"
+               th:errors="*{rentOfTripId}" class="validation-message"></label><br/>
+        <button class="btn btn-lg" name="Submit" value="add" th:text="Submit"></button>
+    </form>
+    <div class="alert alert-success" th:text="${successMesssage5}"></div>
+</div>
+<script>
+    function myFunction() {
+        return confirm("Confirm!");
+    }
+</script>
+</body>
+</html>

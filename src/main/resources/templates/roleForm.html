@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>RoleForm</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .custom {
+            width: 175px !important;
+        }
+
+    </style>
+</head>
+
+<body style="background-image: url(/background/landscape.jpg)">
+
+<br/>
+<div class="container" style="margin:50px">
+<form th:action="@{/admin}">
+    <button class="btn btn-danger custom" name="back" type="submit">Back</button>
+</form>
+</div>
+
+<div class="container" style="width: 40%">
+    <form th:action="@{/web/addRole}" method="post" th:object="${role}">
+        <p style="color: white">Role name</p>
+        <input type="text" th:field="*{name}" th:placeholder="addRole"
+               class="form-control"/><br/>
+        <button class="btn btn-lg" name="Submit" value="add" th:text="Submit"></button>
+    </form>
+    <div class="alert alert-success" th:text="${successMesssage}"></div>
+</div>
+</body>
+</html>

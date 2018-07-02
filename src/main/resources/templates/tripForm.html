@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>TripForm</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .custom {
+            width: 175px !important;
+        }
+
+    </style>
+    <style>
+        .validation-message {
+            color: red;
+        }
+    </style>
+</head>
+<body style="background-image: url(/background/landscape.jpg)">
+<div align="center" style="border:1px solid red">
+    <h1>Trip adding/updating</h1>
+</div>
+<br/>
+
+<div class="container" style="margin:50px">
+    <form th:action="@{/web/tripFunction}">
+        <button class="btn btn-success custom" name="back" type="submit">Back</button>
+    </form>
+</div>
+
+<div class="container" style="width: 40%">
+    <td><strong style="font-size: 12px;">Provide location and price for new trip </strong></td>
+    <form th:action="@{/web/addTrip}" method="post" th:object="${trip}">
+        <input type="text" id="location" name="location" required th:placeholder="Location"
+               class="form-control"/><br/>
+        <input type="text" id="tripPrice" name="tripPrice" required th:placeholder="TripPrice"
+               class="form-control"/><br/>
+        <button class="btn btn-danger custom" name="Submit" value="add" th:text="Adding"></button>
+    </form>
+
+    <div class="alert alert-success" th:text="${successMesssage}"></div>
+</div>
+<br/>
+<div class="container" style="width: 40%">
+    <form onsubmit="return myFunction(this);" th:action="@{/web/updateTrip}" method="post" th:object="${trip}">
+        <td><strong style="font-size: 12px;color: white">Provide a trip "Id" to update the Trip</strong></td>
+        <input type="text" th:field="*{id}" required th:placeholder="rentId"
+               class="form-control"/><br/>
+        <label th:if="${#fields.hasErrors('id')}"
+               th:errors="*{id}" class="validation-message"></label>
+        <input type="text" id="location1" name="location" required th:placeholder="Location"
+               class="form-control"/><br/>
+        <input type="text" id="tripPrice1" name="tripPrice" required th:placeholder="TripPrice"
+               class="form-control"/><br/>
+        <button class="btn btn-danger custom" name="Submit" value="add" th:text="Updating"></button>
+    </form>
+    <div class="alert alert-success" th:text="${successMesssage1}"></div>
+</div>
+<script>
+    function myFunction() {
+        return confirm("Confirm!");
+    }
+</script>
+</body>
+</html>
